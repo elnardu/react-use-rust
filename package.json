@@ -1,7 +1,7 @@
 {
-  "name": "react-use-c",
+  "name": "react-use-rust",
   "version": "1.0.0",
-  "description": "Use C in your server side react components",
+  "description": "Use Rust in your server side react components",
   "main": "this field is so weird",
   "scripts": {
     "start": "npm run build && node server.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elnardu/react-use-c.git"
+    "url": "git+https://github.com/elnardu/react-use-rust.git"
   },
   "keywords": [
     "C",
@@ -24,16 +24,15 @@
   "author": "me",
   "license": "WTFPL",
   "bugs": {
-    "url": "https://github.com/elnardu/react-use-c/issues"
+    "url": "https://github.com/elnardu/react-use-rust/issues"
   },
-  "homepage": "https://github.com/elnardu/react-use-c#readme",
+  "homepage": "https://github.com/elnardu/react-use-rust#readme",
   "devDependencies": {
     "esbuild": "0.19.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "@oven/zig": "0.12.0-dev.1286"
+    "express": "^4.18.2"
   }
 }

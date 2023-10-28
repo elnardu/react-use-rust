@@ -20,7 +20,7 @@ ${strings[0]}
   return randomClassId;
 }
 
-async function runC(code) {
+async function runRust(code) {
   const res = await fetch("/rpc/rce", {
     method: "POST",
     body: JSON.stringify({ code: code }),
@@ -39,30 +39,29 @@ const appStyles = css`
 
 const App = () => (
   <div className={appStyles}>
-    <h1>React use C demo</h1>
+    <h1>React use Rust demo</h1>
     <Demo />
   </div>
 );
 
 const Demo = () => {
   const [output, setOutput] = useState(null);
-  const cHelloWorld = async () => {
-    "use c";
-    #include <stdio.h>
-    int main() {
-      printf("Hello from C!\n");
-      return 0;
+  const rustHelloWorld = async () => {
+    "use rust";
+    fn main() {
+      println!("Hello, world from Rust!");
+      println!("Also hi HN!");
     }
   };
   const onClick = async () => {
-    const out = await cHelloWorld();
+    const out = await rustHelloWorld();
     setOutput(out.stdout);
   };
 
   return (
     <div>
-      <button onClick={onClick}>Run C code!</button>
-      <p>Output from C:</p>
+      <button onClick={onClick}>Run Rust code!</button>
+      <p>Output from Rust:</p>
       <pre>{ output }</pre>
     </div>
   );

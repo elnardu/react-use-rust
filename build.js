@@ -17,29 +17,29 @@ function findClosingBrace(string) {
   return null;
 }
 
-function transformToUseC(args) {
+function transformToUseRust(args) {
   const content = fsButWihtoutPromises.readFileSync(args.path, "utf8");
-  const splits = content.split(/["']use c["'];/);
+  const splits = content.split(/["']use rust["'];/);
   let result = splits[0];
   for (let i = 1; i < splits.length; i++) {
-    const endOfCCode = findClosingBrace(splits[i]);
-    const cCode = splits[i].slice(0, endOfCCode);
-    result += `return runC("${encodeURIComponent(cCode)}");`;
-    result += splits[i].slice(endOfCCode, splits[i].length);
+    const endOfRustCode = findClosingBrace(splits[i]);
+    const rustCode = splits[i].slice(0, endOfRustCode);
+    result += `return runRust("${encodeURIComponent(rustCode)}");`;
+    result += splits[i].slice(endOfRustCode, splits[i].length);
   }
   return result;
 }
 
-const useCPlugin = {
-  name: "use-c",
+const useRustPlugin = {
+  name: "use-rust",
   setup(build) {
     build.onLoad({ filter: /.js$/ }, (args) => ({
-      contents: transformToUseC(args),
+      contents: transformToUseRust(args),
       loader: "js",
     }));
 
     build.onLoad({ filter: /.jsx$/ }, (args) => ({
-      contents: transformToUseC(args),
+      contents: transformToUseRust(args),
       loader: "jsx",
     }));
   },
@@ -64,7 +64,7 @@ async function build() {
     minify: true,
     bundle: true,
     sourcemap: true,
-    plugins: [useCPlugin],
+    plugins: [useRustPlugin],
   });
 
   await fs.cp("index.html", "dist/index.html");
